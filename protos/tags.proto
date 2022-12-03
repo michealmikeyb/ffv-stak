@@ -1,0 +1,30 @@
+
+syntax = "proto3";
+
+option go_package = "https://github.com/michealmikeyb/ffv/tags";
+
+package ffv.tags;
+
+service TagService {
+  rpc LikePost(RatePostRequest) returns (TagBaseResponse) {}
+  rpc DisikePost(RatePostRequest) returns (TagBaseResponse) {}
+}
+
+message RatePostRequest {
+  string user_id = 1;
+  Post post = 2;
+}
+
+message Post {
+  string url = 1;
+  repeated string tags = 2;
+  string source = 3;
+  string author = 4;
+  string content = 5;
+  int32 likes = 6;
+}
+
+message TagBaseResponse {
+  string status = 1;
+  string error = 2;
+}

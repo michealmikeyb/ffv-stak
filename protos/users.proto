@@ -1,0 +1,50 @@
+
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "https://github.com/michealmikeyb/ffv/users";
+
+package ffv.user;
+
+service UserService {
+  rpc AddUser(AddUserRequest) returns (AddUserResponse) {}
+  rpc GetUser(GetUserRequest) returns (AddUserResponse) {}
+  rpc GetPost(GetPostRequest) returns (GetPostResponse) {}
+}
+
+message Post {
+  string url = 1;
+  repeated string tags = 2;
+  string source = 3;
+  string author = 4;
+  string content = 5;
+  int32 likes = 6;
+}
+
+
+message AddUserRequest {
+  string mastodon_id = 2;
+  string mastodon_username = 3;
+}
+
+message AddUserResponse {
+  string user_id = 1;
+}
+
+message GetUserRequest {
+  string mastodon_id = 1;
+}
+
+message UserBaseResponse {
+  string status = 1;
+  string error = 2;
+}
+
+message GetPostRequest {
+  string user_id = 1;
+}
+
+message GetPostResponse {
+  Post post = 1;
+}
+
